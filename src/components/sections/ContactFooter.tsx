@@ -1,0 +1,316 @@
+'use client';
+
+import { motion } from 'framer-motion';
+import { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import * as z from 'zod';
+import { BackgroundBeamsWithCollision } from '@/components/ui/background-beams-with-collision';
+import { Meteors } from '@/components/ui/meteors';
+import { Input, Label } from '@/components/ui/signup-form-elements';
+import { Button as MovingBorderButton } from '@/components/ui/moving-border';
+import { MapPin, Mail, Phone, Clock, Facebook, Instagram, Linkedin, Send } from 'lucide-react';
+import { TextGenerateEffect } from '@/components/ui/TextGenerateEffect';
+
+const schema = z.object({
+  name: z.string().min(2, 'Name is required'),
+  email: z.string().email('Valid email required'),
+  phone: z.string().min(6, 'Phone number required'),
+  message: z.string().min(10, 'Message must be at least 10 characters').max(180, 'Maximum 180 characters'),
+});
+
+type FormData = z.infer<typeof schema>;
+
+const navLinks = ['About', 'Services', 'Transformations', 'Founder', 'Team', 'FAQ', 'Blog', 'Contact'];
+
+const contactDetails = [
+  { icon: MapPin, label: 'Address', value: 'ASF, Dubai, UAE' },
+  { icon: Mail, label: 'Email', value: 'akshay.asf@gmail.com' },
+  { icon: Phone, label: 'Phone', value: '+971 589485094' },
+  { icon: Clock, label: 'Hours', value: 'Mon–Sat: 6AM–8PM  |  Sunday: Closed' },
+];
+
+const socialLinks = [
+  { icon: Facebook, href: '#', label: 'Facebook' },
+  { icon: Instagram, href: 'https://www.instagram.com/asfhealthandfitness/', label: 'Instagram' },
+  { icon: Linkedin, href: '#', label: 'LinkedIn' },
+];
+
+const formFields = [
+  { id: 'name', label: 'Full Name', type: 'text', placeholder: 'John Smith' },
+  { id: 'email', label: 'Email Address', type: 'email', placeholder: 'john@example.com' },
+  { id: 'phone', label: 'Phone Number', type: 'tel', placeholder: '+971 5X XXX XXXX' },
+];
+
+export default function ContactFooter() {
+  const [submitted, setSubmitted] = useState(false);
+  const [charCount, setCharCount] = useState(0);
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+    reset,
+  } = useForm<FormData>({ resolver: zodResolver(schema) });
+
+  const onSubmit = async (data: FormData) => {
+    await new Promise(r => setTimeout(r, 1000));
+    console.log(data);
+    setSubmitted(true);
+    reset();
+    setTimeout(() => setSubmitted(false), 4000);
+  };
+
+  return (
+    <div id="contact">
+      {/* === CONTACT BAND === */}
+      <section className="relative min-h-[100dvh] bg-[#1A1A1A] overflow-hidden py-20 lg:py-24">
+        {/* Animated beams background */}
+        <BackgroundBeamsWithCollision className="absolute inset-0 z-0">
+          <div />
+        </BackgroundBeamsWithCollision>
+
+        {/* Meteors */}
+        <div className="absolute inset-0 z-[1] overflow-hidden">
+          <Meteors number={18} />
+        </div>
+
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex flex-col justify-center">
+          {/* Section Header */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-8"
+          >
+            <span className="text-accent text-[10px] font-bold uppercase tracking-[0.3em] mb-2 block">
+              START YOUR TRANSFORMATION
+            </span>
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-black text-white mb-2 tracking-tight">
+              Get In Touch!
+            </h2>
+            <TextGenerateEffect
+              words="Ready to begin? Schedule a free consultation today."
+              className="text-gray-400 text-sm max-w-lg mx-auto leading-relaxed font-normal text-center"
+            />
+          </motion.div>
+
+          {/* Two Column Layout */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-20 items-center">
+            {/* Left: Logo + Contact Details */}
+            <motion.div
+              initial={{ opacity: 0, x: -40 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7 }}
+            >
+              {/* Logo */}
+              <div className="mb-6">
+                <span className="text-2xl font-black tracking-tight">
+                  <span className="text-white">ASF</span>
+                  <span className="text-accent"> Fitness</span>
+                </span>
+                <p className="text-gray-400 mt-1 text-xs">High Performance. Real Results.</p>
+              </div>
+
+              {/* Contact Details */}
+              <div className="space-y-4 mb-6">
+                {contactDetails.map((item, i) => (
+                  <motion.div
+                    key={item.label}
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: i * 0.1 }}
+                    className="flex items-start gap-4"
+                  >
+                    <div className="bg-accent/10 p-2 rounded-xl flex-shrink-0">
+                      <item.icon className="w-4 h-4 text-accent" />
+                    </div>
+                    <div>
+                      <p className="text-[10px] text-gray-500 uppercase tracking-wider font-semibold mb-0.5">{item.label}</p>
+                      <p className="text-white text-xs font-medium">{item.value}</p>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+
+              {/* Social Links */}
+              <div className="flex gap-3">
+                {socialLinks.map((s, i) => (
+                  <motion.a
+                    key={s.label}
+                    href={s.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    initial={{ opacity: 0, scale: 0 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.4 + i * 0.1, type: 'spring', stiffness: 200 }}
+                    whileHover={{ scale: 1.1, y: -2 }}
+                    className="bg-white/5 hover:bg-accent/20 border border-white/10 hover:border-accent/40 p-2.5 rounded-xl text-gray-400 hover:text-accent transition-all duration-200"
+                    aria-label={s.label}
+                  >
+                    <s.icon className="w-4 h-4" />
+                  </motion.a>
+                ))}
+              </div>
+            </motion.div>
+
+            {/* Right: Contact Form */}
+            <motion.div
+              initial={{ opacity: 0, x: 40 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7 }}
+              className="bg-white/5 border border-white/10 rounded-2xl p-6 backdrop-blur-sm"
+            >
+              {submitted ? (
+                <motion.div
+                  initial={{ scale: 0.9, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  className="flex flex-col items-center justify-center h-full py-16 text-center"
+                >
+                  <div className="text-5xl mb-4">✅</div>
+                  <h3 className="text-white text-2xl font-bold mb-2">Message Sent!</h3>
+                  <p className="text-gray-400">We'll get back to you within 24 hours.</p>
+                </motion.div>
+              ) : (
+                <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+                  {/* Text fields with stagger */}
+                  {formFields.map((field, i) => (
+                    <motion.div
+                      key={field.id}
+                      initial={{ opacity: 0, y: 15 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: 0.1 + i * 0.08 }}
+                      className="space-y-1.5"
+                    >
+                      <Label htmlFor={field.id} className="text-[11px] font-bold uppercase tracking-wider text-gray-400">{field.label}</Label>
+                      <Input
+                        id={field.id}
+                        type={field.type}
+                        placeholder={field.placeholder}
+                        className="h-10 text-xs"
+                        {...register(field.id as keyof FormData)}
+                      />
+                      {errors[field.id as keyof FormData] && (
+                        <p className="text-red-400 text-[10px]">{errors[field.id as keyof FormData]?.message}</p>
+                      )}
+                    </motion.div>
+                  ))}
+
+                  {/* Textarea */}
+                  <motion.div
+                    initial={{ opacity: 0, y: 15 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.35 }}
+                    className="space-y-1.5"
+                  >
+                    <div className="flex justify-between items-center">
+                      <Label htmlFor="message" className="text-[11px] font-bold uppercase tracking-wider text-gray-400">Message</Label>
+                      <span className="text-[10px] text-gray-500">{charCount}/180</span>
+                    </div>
+                    <textarea
+                      id="message"
+                      rows={2}
+                      maxLength={180}
+                      placeholder="Tell us about your goals..."
+                      {...register('message')}
+                      onChange={(e) => setCharCount(e.target.value.length)}
+                      className="w-full bg-zinc-800 text-white rounded-md px-3 py-2 text-xs border-none placeholder:text-neutral-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-400 resize-none transition duration-300"
+                    />
+                    {errors.message && <p className="text-red-400 text-[10px]">{errors.message.message}</p>}
+                  </motion.div>
+
+                  {/* Send Button */}
+                  <motion.div
+                    initial={{ opacity: 0, y: 15 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.45 }}
+                  >
+                    <MovingBorderButton
+                      as="button"
+                      type="submit"
+                      disabled={isSubmitting}
+                      borderRadius="2rem"
+                      containerClassName="h-12 w-full"
+                      className="bg-accent text-dark font-bold text-xs tracking-wider flex items-center gap-2 justify-center"
+                      borderClassName="bg-[radial-gradient(var(--accent)_40%,transparent_60%)]"
+                    >
+                      <Send className="w-3.5 h-3.5" />
+                      {isSubmitting ? 'Sending...' : 'Send Message'}
+                    </MovingBorderButton>
+                  </motion.div>
+                </form>
+              )}
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* === FOOTER === */}
+      <footer className="bg-[#0F0F0F] border-t border-white/5">
+        {/* Row 1: Logo | Nav Links | Social Icons */}
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+            {/* Logo */}
+            <div className="flex-shrink-0">
+              <span className="text-xl font-black tracking-tight">
+                <span className="text-white">ASF</span>
+                <span className="text-accent"> Fitness</span>
+              </span>
+            </div>
+
+            {/* Nav Links */}
+            <nav className="flex flex-wrap justify-center gap-x-6 gap-y-2">
+              {navLinks.map((link) => (
+                <a
+                  key={link}
+                  href={`#${link.toLowerCase()}`}
+                  className="text-gray-400 hover:text-accent text-sm transition-colors duration-200"
+                >
+                  {link}
+                </a>
+              ))}
+            </nav>
+
+            {/* Social Icons */}
+            <div className="flex gap-3">
+              {socialLinks.map((s) => (
+                <a
+                  key={s.label}
+                  href={s.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={s.label}
+                  className="text-gray-500 hover:text-accent transition-colors duration-200"
+                >
+                  <s.icon className="w-4 h-4" />
+                </a>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Row 2: Legal Strip */}
+        <div className="border-t border-white/5">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+            <div className="flex flex-col sm:flex-row flex-wrap justify-center items-center gap-2 text-center text-xs text-gray-600">
+              <a href="#" className="hover:text-gray-400 transition-colors">Terms of Use</a>
+              <span className="hidden sm:inline text-gray-700">|</span>
+              <a href="#" className="hover:text-gray-400 transition-colors">Privacy Policy</a>
+              <span className="hidden sm:inline text-gray-700">|</span>
+              <span>Copyright © 2025 ASF Fitness. All Rights Reserved.</span>
+              <span className="hidden sm:inline text-gray-700">|</span>
+              <span>Designed by <a href="#" className="text-accent/70 hover:text-accent transition-colors">Decimal Technologies</a></span>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+  );
+}
