@@ -18,7 +18,7 @@ function ThickRibbon() {
   ];
 
   return (
-    <div className="absolute top-[80%] left-0 w-full h-[60vh] md:h-[80vh] -translate-y-1/2 overflow-hidden pointer-events-none z-0">
+    <div className="absolute top-[92%] sm:top-[90%] md:top-[80%] left-0 w-full h-[60vh] md:h-[80vh] -translate-y-1/2 overflow-hidden pointer-events-none z-0">
       <svg
         viewBox="0 0 1440 400"
         className="w-full h-full preserve-3d"
@@ -169,11 +169,11 @@ export default function Hero() {
           </motion.span>
 
           <div ref={headingRef} className="w-full flex justify-center">
-            <motion.h1 
+            <motion.h1
               variants={headingContainer}
               initial="hidden"
               animate={isHeadingInView ? "visible" : "hidden"}
-              className="text-[20px] sm:text-3xl md:text-5xl lg:text-7xl font-black text-purple tracking-tight font-heading leading-tight mb-8 flex flex-nowrap justify-center gap-x-1 sm:gap-x-2 md:gap-x-4 whitespace-nowrap overflow-visible"
+              className="text-[36px] sm:text-4xl md:text-5xl lg:text-7xl font-black text-purple tracking-tight font-heading leading-tight mb-8 flex flex-col md:flex-row md:flex-nowrap justify-center gap-y-2 md:gap-y-0 md:gap-x-4 whitespace-nowrap overflow-visible"
             >
               {[
                 { text: "ADAPTIVE.", highlight: "A" },
@@ -181,7 +181,7 @@ export default function Hero() {
                 { text: "FITNESS.", highlight: "F" }
               ].map((word, i) => (
                 <motion.span key={i} variants={wordAnim}>
-                  <span className="text-yellow">{word.highlight}</span>{word.text.slice(1)}
+                  <span className="text-purple">{word.highlight}</span>{word.text.slice(1)}
                 </motion.span>
               ))}
             </motion.h1>
@@ -190,7 +190,7 @@ export default function Hero() {
           <div className="mb-12 md:mb-16 max-w-3xl px-4 md:px-0 relative z-50">
             <TextGenerateEffect
               words="Master your fitness, master your life."
-              className="text-base md:text-2xl text-black font-bold tracking-tight drop-shadow-[0_0_10px_rgba(85,37,131,0.5)]"
+              className="text-base md:text-2xl text-black font-bold tracking-tight"
             />
 
           </div>
@@ -201,7 +201,7 @@ export default function Hero() {
             whileTap={{ scale: 0.98 }}
             className="group relative inline-flex h-16 items-center justify-center overflow-hidden rounded-full bg-purple px-8 md:px-14 font-bold text-white transition-all duration-300 hover:bg-yellow hover:text-black hover:shadow-[0_20px_60px_-10px_rgba(241,255,3,0.5)] z-50 border border-purple shadow-sm w-full max-w-[320px] md:w-auto"
           >
-            <span className="relative z-10 text-sm tracking-[0.2em] uppercase">Book your free assessment</span>
+            <span className="relative z-10 text-sm tracking-[0.2em] uppercase text-center">Book your free assessment</span>
             <div className="absolute inset-0 z-0 bg-gradient-to-r from-zinc-100/0 via-zinc-100/20 to-zinc-100/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000" />
           </motion.a>
         </motion.div>

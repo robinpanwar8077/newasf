@@ -49,7 +49,7 @@ const blogs = [
 
 export default function Blogs() {
   return (
-    <section id="blog" className="min-h-[100dvh] flex items-center bg-white overflow-hidden py-20 lg:py-24">
+    <section id="blog" className="bg-white overflow-hidden py-10 lg:py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center w-full">
         <div className="mb-4">
           <motion.span
@@ -131,7 +131,7 @@ export default function Blogs() {
           transition={{ delay: 0.4 }}
           className="mt-8"
         >
-          <button className="border-2 border-accent text-dark font-black px-8 py-3 rounded-full hover:bg-accent transition-all uppercase tracking-widest text-xs shadow-lg shadow-accent/5">
+          <button className="bg-purple border-2 border-purple text-white hover:text-black font-black px-8 py-3 rounded-full hover:bg-yellow hover:border-yellow transition-all uppercase tracking-widest text-xs shadow-lg shadow-accent/5">
             Show More
           </button>
         </motion.div>

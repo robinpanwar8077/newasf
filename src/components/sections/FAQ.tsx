@@ -157,7 +157,7 @@ export default function FAQ() {
       </LampContainer>
 
       {/* Accordion Grid */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-24">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12">
         {/* Desktop: 2-col grid */}
         <div className="hidden md:grid grid-cols-2 gap-x-16">
           <div>
@@ -185,14 +185,14 @@ export default function FAQ() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.4 }}
-          className="text-center mt-16"
+          className="text-center mt-8"
         >
           <p className="text-gray-500 mb-6 text-lg">Still have questions? We're happy to help.</p>
             <motion.a
               href="#contact"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.98 }}
-              className="group relative inline-flex h-14 w-56 items-center justify-center overflow-hidden rounded-full bg-transparent px-8 font-black text-black transition-all duration-300 hover:bg-accent hover:shadow-[0_0_30px_-5px_#F1FF03] border-[3px] border-accent"
+              className="group relative inline-flex h-14 w-56 items-center justify-center overflow-hidden rounded-full bg-purple px-8 font-black text-white transition-all duration-300 hover:bg-yellow hover:text-black hover:shadow-[0_0_30px_-5px_#F1FF03] border-[3px] border-purple hover:border-yellow text-center"
             >
               <span className="relative z-10 flex items-center justify-center text-[15px] tracking-widest uppercase">
                 Get In Touch

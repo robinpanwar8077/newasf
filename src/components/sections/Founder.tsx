@@ -9,14 +9,16 @@ export default function Founder() {
     {
       name: "Suraj Shetty",
       role: "CEO Asf Dubai",
-      image: "/coach-suraj.webp",
-      bio: "12+ Years Coaching Experience | 300+ Clients Trained"
+      image: "/Suraj.jpg",
+      bio: "12+ Years Coaching Experience | 300+ Clients Trained",
+      objectPosition: "center 15%"
     },
     {
       name: "Akshay Sahu",
       role: "CMO Asf Dubai",
       image: "/Akshay.jpg",
-      bio: "10+ yrs. Coaching exp. | 200+ Clients Trained"
+      bio: "10+ yrs. Coaching exp. | 200+ Clients Trained",
+      objectPosition: "center center"
     },
 
   ];
@@ -39,7 +41,7 @@ export default function Founder() {
           viewport={{ once: true }}
           className="headline-medium mb-16"
         >
-          MEET THE FOUNDERS
+          Leadership At ASF
         </motion.h2>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-5xl mx-auto">
@@ -60,6 +62,7 @@ export default function Founder() {
                     <img
                       src={founder.image}
                       alt={founder.name}
+                      style={{ objectPosition: founder.objectPosition }}
                       className="w-full h-full object-cover group-hover/card:scale-110 transition-transform duration-500"
                     />
                   </CardItem>

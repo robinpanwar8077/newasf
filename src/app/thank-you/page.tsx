@@ -22,7 +22,7 @@ export default function ThankYouPage() {
         
         <Link 
           href="/"
-          className="inline-flex h-12 items-center justify-center rounded-full bg-accent px-8 font-bold text-dark transition-all duration-300 hover:bg-yellow hover:scale-105 shadow-[0_0_20px_-5px_#F1FF03]"
+          className="inline-flex h-12 items-center justify-center rounded-full bg-accent px-8 font-bold text-dark transition-all duration-300 hover:bg-yellow hover:scale-105 shadow-[0_0_20px_-5px_#F1FF03] text-center"
         >
           Return to Home
         </Link>

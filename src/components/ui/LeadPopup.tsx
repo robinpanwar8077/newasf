@@ -73,13 +73,13 @@ export default function LeadPopup() {
               <p className="text-gray-600 mb-6 font-medium">
                 An expert trainer will visit you directly to build your personalised roadmap to success.
               </p>
-              
+
               <a
                 href="#contact"
                 onClick={closePopup}
                 className="block w-full text-center bg-accent text-dark font-bold py-4 rounded-xl shadow-lg hover:shadow-[0_0_20px_-5px_#F1FF03] hover:scale-[1.02] hover:bg-yellow transition-all duration-300"
               >
-                Claim My Free Session Let's Go!
+                Claim My Free Session
               </a>
               <button onClick={closePopup} className="mt-4 text-xs text-gray-400 underline hover:text-gray-600 transition-colors">
                 No thanks, I'm already happy with my fitness level.

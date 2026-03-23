@@ -124,7 +124,7 @@ export default function About() {
               href="#contact"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="inline-block bg-purple text-white px-12 py-5 rounded-full font-bold tracking-wide transition-all border border-transparent shadow-xl hover:bg-purple/90"
+              className="inline-block w-full sm:w-auto bg-purple text-white px-12 py-5 rounded-full font-bold tracking-wide transition-all border border-transparent shadow-xl hover:bg-yellow hover:text-black text-center"
             >
               Book your free assessment
             </motion.a>
