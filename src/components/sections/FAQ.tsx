@@ -10,7 +10,7 @@ const faqData = [
   {
     col: 'left',
     question: "What makes your personal fitness program different from other trainers in Dubai?",
-    answer: "ASF is built on a science-backed, data-driven methodology unlike most personal training programs. We assess your unique physiology, lifestyle, and goals before creating a fully customised protocol. Every client receives dedicated 1-on-1 attention, structured progress tracking, and ongoing adjustments — not just a template workout plan."
+    answer: "ASF is built on a science-backed, data-driven methodology unlike most personal training programs. We assess your unique physiology, lifestyle, and goals before creating a fully customised protocol. Every client receives dedicated 1-on-1 attention, structured progress tracking, and ongoing adjustments not just a template workout plan."
   },
   {
     col: 'left',
@@ -35,7 +35,7 @@ const faqData = [
   {
     col: 'left',
     question: "Is there a nutrition plan included?",
-    answer: "Yes. Every ASF programme includes comprehensive nutritional guidance tailored to your specific goals. We focus on sustainable eating habits, not restrictive diets — helping you fuel performance, recover faster, and maintain results long-term."
+    answer: "Yes. Every ASF programme includes comprehensive nutritional guidance tailored to your specific goals. We focus on sustainable eating habits, not restrictive diets helping you fuel performance, recover faster, and maintain results long-term."
   },
   {
     col: 'right',
@@ -60,7 +60,7 @@ const faqData = [
   {
     col: 'right',
     question: "Can I pause or reschedule sessions?",
-    answer: "We understand that life happens. Sessions can be rescheduled with advance notice as per our scheduling policy. For extended pauses due to travel or medical reasons, we offer flexible hold options — contact your coach directly to arrange this."
+    answer: "We understand that life happens. Sessions can be rescheduled with advance notice as per our scheduling policy. For extended pauses due to travel or medical reasons, we offer flexible hold options contact your coach directly to arrange this."
   },
   {
     col: 'right',
@@ -124,7 +124,7 @@ function FAQItem({ question, answer, index }: { question: string; answer: string
 
 export default function FAQ() {
   return (
-    <section id="faq" className="min-h-[100dvh] flex flex-col bg-white overflow-hidden py-20">
+    <section id="faq" className="flex flex-col bg-white overflow-hidden pt-0 pb-20">
       {/* Lamp Header */}
       <LampContainer className="mb-0">
         <motion.span
@@ -188,31 +188,16 @@ export default function FAQ() {
           className="text-center mt-16"
         >
           <p className="text-gray-500 mb-6 text-lg">Still have questions? We're happy to help.</p>
-          <motion.a
-            href="#contact"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.98 }}
-            className="group relative inline-flex h-14 w-56 items-center justify-center overflow-hidden rounded-full bg-transparent px-8 font-bold text-zinc-950 transition-all duration-300 hover:bg-accent hover:text-white hover:shadow-[0_0_30px_-5px_#F1FF03] border border-zinc-950/10 hover:border-transparent"
-          >
-            {/* Shimmer Effect */}
-            <div className="absolute inset-0 z-0 flex h-full w-full justify-center [transform:skew(-12deg)]">
-              <div className="relative h-full w-10 bg-zinc-950/5 blur-xl transition-all duration-500 group-hover:bg-white/40 group-hover:w-20" />
-            </div>
-
-            {/* Content */}
-            <span className="relative z-10 flex items-center gap-2 text-sm tracking-[0.1em] uppercase">
-              Get In Touch
-              <motion.span
-                animate={{ x: [0, 4, 0] }}
-                transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
-              >
-                →
-              </motion.span>
-            </span>
-
-            {/* Subtle Gradient Glow on Hover */}
-            <div className="absolute inset-0 z-0 bg-gradient-to-tr from-[#F1FF03]/0 via-[#F1FF03]/5 to-[#F1FF03]/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-          </motion.a>
+            <motion.a
+              href="#contact"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.98 }}
+              className="group relative inline-flex h-14 w-56 items-center justify-center overflow-hidden rounded-full bg-transparent px-8 font-black text-black transition-all duration-300 hover:bg-accent hover:shadow-[0_0_30px_-5px_#F1FF03] border-[3px] border-accent"
+            >
+              <span className="relative z-10 flex items-center justify-center text-[15px] tracking-widest uppercase">
+                Get In Touch
+              </span>
+            </motion.a>
         </motion.div>
       </div>
     </section>

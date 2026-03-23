@@ -2,6 +2,8 @@ import type { Metadata } from 'next'
 import { Playfair_Display, Montserrat } from 'next/font/google'
 import './globals.css'
 import LenisProvider from '@/components/LenisProvider'
+import LeadPopup from '@/components/ui/LeadPopup'
+import WhatsAppWidget from '@/components/ui/WhatsAppWidget'
 
 const playfair = Playfair_Display({
   subsets: ['latin'],
@@ -33,6 +35,8 @@ export default function RootLayout({
       <body className={`${playfair.variable} ${montserrat.variable} font-sans antialiased text-dark bg-white`}>
         <LenisProvider>
           {children}
+          <LeadPopup />
+          <WhatsAppWidget />
         </LenisProvider>
       </body>
     </html>

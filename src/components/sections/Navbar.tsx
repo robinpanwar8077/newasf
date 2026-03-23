@@ -77,7 +77,7 @@ export default function Navbar() {
                   initial={{ opacity: 0, y: -20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.1 + i * 0.08, duration: 0.5 }}
-                  className="text-sm font-semibold text-white/90 hover:text-accent transition-colors"
+                  className="text-sm font-semibold text-white/90 transition-colors"
                 >
                   {link.name}
                 </motion.a>
@@ -85,7 +85,7 @@ export default function Navbar() {
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.97 }}
-                className="bg-accent text-dark px-6 py-3 rounded-full text-sm font-bold shadow-lg hover:bg-yellow hover:text-white transition-all"
+                className="bg-accent text-dark px-6 py-3 rounded-full text-sm font-bold shadow-lg hover:bg-yellow transition-all"
               >
                 <a href='#contact'>   Register Your Interest</a>
               </motion.button>
@@ -141,12 +141,12 @@ export default function Navbar() {
                     key={link.name}
                     href={link.href}
                     onClick={() => setIsOpen(false)}
-                    className="text-lg font-semibold text-dark hover:text-purple transition-colors border-b border-gray-100 pb-2"
+                    className="text-lg font-semibold text-dark transition-colors border-b border-gray-100 pb-2"
                   >
                     {link.name}
                   </a>
                 ))}
-                <button className="mt-4 bg-accent text-dark px-6 py-4 rounded-full text-sm font-bold shadow-lg hover:bg-yellow hover:text-white transition-all">
+                <button className="mt-4 bg-accent text-dark px-6 py-4 rounded-full text-sm font-bold shadow-lg hover:bg-yellow transition-all">
                   Register Your Interest
                 </button>
               </div>

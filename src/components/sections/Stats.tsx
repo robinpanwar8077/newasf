@@ -8,7 +8,7 @@ const stats = [
   { label: "Years of Experience", value: 10, suffix: "+" },
   { label: "Expert Trainers", value: 20, suffix: "+" },
   { label: "Transformations", value: 450, suffix: "+" },
-  { label: "Gym Locations to Train", value: 10, suffix: "+" },
+  { label: "Accessible Locations", value: 10, suffix: "+" },
 ];
 
 export default function Stats() {
@@ -20,7 +20,7 @@ export default function Stats() {
   return (
     <section id="stats" ref={ref} className="bg-primary py-24 relative z-10 shadow-xl">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-12 text-center">
+        <div className="flex flex-wrap justify-center gap-12 md:gap-x-24 md:gap-y-16 text-center">
           {stats.map((stat, i) => (
             <motion.div
               key={stat.label}
@@ -42,7 +42,7 @@ export default function Stats() {
                   <span>0{stat.suffix}</span>
                 )}
               </div>
-              <p className="text-white font-bold uppercase tracking-widest text-sm max-w-[120px] mx-auto opacity-80">
+              <p className="text-white font-bold uppercase tracking-widest text-sm max-w-[180px] mx-auto opacity-80">
                 {stat.label}
               </p>
             </motion.div>

@@ -26,7 +26,7 @@ const teamTooltip = [
 
 export default function About() {
   return (
-    <section id="about" className="min-h-[100dvh] flex items-center bg-white overflow-hidden py-20 lg:py-24">
+    <section id="about" className="min-h-[85vh] flex items-center bg-white overflow-hidden pt-10 pb-20 lg:pt-12 lg:pb-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
 
@@ -91,14 +91,14 @@ export default function About() {
               </h2>
             </div>
 
-            <div className="space-y-4 text-gray-600 text-base leading-relaxed mb-6">
+            <div className="space-y-4 text-black text-base leading-relaxed mb-6">
               <TextGenerateEffect
-                words="ASF Health & Fitness is a dedicated fitness and wellness team based in Dubai, specialising in helping entrepreneurs and busy professionals elevate their physical and mental well-being. With over a decade of experience, we focus on tailored fitness strategies that enhance energy, mental clarity, resilience, and overall vitality — all designed to help you perform at your peak in every area of life."
-                className="text-gray-600 font-normal"
+                words="ASF Health & Fitness is a dedicated fitness and wellness team based in Dubai, specialising in helping entrepreneurs and busy professionals elevate their physical and mental well-being. With over a decade of experience, we focus on tailored fitness strategies that enhance energy, mental clarity, resilience, and overall vitality all designed to help you perform at your peak in every area of life."
+                className="text-black font-normal"
               />
               <TextGenerateEffect
                 words="At ASF, we believe that a strong body and a sharp mind are the true foundations of leadership, creativity, and personal success. By combining personalised coaching with functional training methods, we empower our clients to unlock new levels of performance, confidence, and well-being."
-                className="text-gray-600 font-normal"
+                className="text-black font-normal"
               />
             </div>
 
@@ -112,8 +112,8 @@ export default function About() {
                   transition={{ delay: 0.4 + i * 0.15 }}
                   className="flex items-center gap-4 group"
                 >
-                  <div className="bg-accent/10 p-1 rounded-full group-hover:bg-accent transition-colors duration-300">
-                    <CheckCircle2 className="text-accent group-hover:text-white transition-colors duration-300" size={18} />
+                  <div className="bg-purple/10 p-1 rounded-full group-hover:bg-purple transition-colors duration-300">
+                    <CheckCircle2 className="text-purple group-hover:text-white transition-colors duration-300" size={18} />
                   </div>
                   <span className="text-dark font-semibold leading-tight">{item}</span>
                 </motion.div>

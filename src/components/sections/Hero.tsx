@@ -1,6 +1,6 @@
 'use client';
 
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion, useScroll, useTransform, useInView } from 'framer-motion';
 import { useRef } from 'react';
 import { Spotlight } from '@/components/ui/Spotlight';
 import { TextGenerateEffect } from '@/components/ui/TextGenerateEffect';
@@ -18,7 +18,7 @@ function ThickRibbon() {
   ];
 
   return (
-    <div className="absolute top-1/2 left-0 w-full h-[60vh] md:h-[80vh] -translate-y-1/2 overflow-hidden pointer-events-none z-0">
+    <div className="absolute top-[80%] left-0 w-full h-[60vh] md:h-[80vh] -translate-y-1/2 overflow-hidden pointer-events-none z-0">
       <svg
         viewBox="0 0 1440 400"
         className="w-full h-full preserve-3d"
@@ -124,11 +124,32 @@ export default function Hero() {
   const yTranslate = useTransform(scrollYProgress, [0, 1], [0, 150]);
   const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
 
+  const headingRef = useRef(null);
+  const isHeadingInView = useInView(headingRef, { once: true, margin: "-10%" });
+
+  const headingContainer = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: 0.12 }
+    }
+  };
+
+  const wordAnim = {
+    hidden: { opacity: 0, y: 30, filter: "blur(10px)" },
+    visible: {
+      opacity: 1,
+      y: 0,
+      filter: "blur(0px)",
+      transition: { duration: 1, ease: "easeOut" as const }
+    }
+  };
+
   return (
     <section
       ref={containerRef}
       id="hero"
-      className="relative min-h-[100dvh] flex flex-col items-center justify-center overflow-hidden bg-white py-20"
+      className="relative min-h-[85vh] flex flex-col items-center justify-center overflow-hidden bg-white pt-32 pb-8 md:pb-12"
     >
       {/* Visual background accents */}
       <Spotlight className="absolute -top-40 left-1/2 -translate-x-1/2 z-0" fill="#F1FF03" />
@@ -147,11 +168,24 @@ export default function Hero() {
             Performance Reinvented
           </motion.span>
 
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-black text-dark tracking-tight font-heading leading-tight mb-8 flex flex-wrap items-center justify-center gap-x-3 md:gap-x-4 md:whitespace-nowrap">
-            <span>ACHIEVE.</span>
-            <span className="text-purple">SURPASS.</span>
-            <span>FLOURISH.</span>
-          </h1>
+          <div ref={headingRef} className="w-full flex justify-center">
+            <motion.h1 
+              variants={headingContainer}
+              initial="hidden"
+              animate={isHeadingInView ? "visible" : "hidden"}
+              className="text-[20px] sm:text-3xl md:text-5xl lg:text-7xl font-black text-purple tracking-tight font-heading leading-tight mb-8 flex flex-nowrap justify-center gap-x-1 sm:gap-x-2 md:gap-x-4 whitespace-nowrap overflow-visible"
+            >
+              {[
+                { text: "ADAPTIVE.", highlight: "A" },
+                { text: "SUSTAINABLE.", highlight: "S" },
+                { text: "FITNESS.", highlight: "F" }
+              ].map((word, i) => (
+                <motion.span key={i} variants={wordAnim}>
+                  <span className="text-yellow">{word.highlight}</span>{word.text.slice(1)}
+                </motion.span>
+              ))}
+            </motion.h1>
+          </div>
 
           <div className="mb-12 md:mb-16 max-w-3xl px-4 md:px-0 relative z-50">
             <TextGenerateEffect
@@ -165,7 +199,7 @@ export default function Hero() {
             href="#contact"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.98 }}
-            className="group relative inline-flex h-16 items-center justify-center overflow-hidden rounded-full bg-white px-8 md:px-14 font-bold text-zinc-950 transition-all duration-300 hover:bg-[#F1FF03] hover:text-white hover:shadow-[0_20px_60px_-10px_rgba(241,255,3,0.5)] z-50 border border-zinc-200 shadow-sm w-full max-w-[320px] md:w-auto"
+            className="group relative inline-flex h-16 items-center justify-center overflow-hidden rounded-full bg-purple px-8 md:px-14 font-bold text-white transition-all duration-300 hover:bg-yellow hover:text-black hover:shadow-[0_20px_60px_-10px_rgba(241,255,3,0.5)] z-50 border border-purple shadow-sm w-full max-w-[320px] md:w-auto"
           >
             <span className="relative z-10 text-sm tracking-[0.2em] uppercase">Book your free assessment</span>
             <div className="absolute inset-0 z-0 bg-gradient-to-r from-zinc-100/0 via-zinc-100/20 to-zinc-100/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000" />

@@ -11,11 +11,16 @@ import { Input, Label } from '@/components/ui/signup-form-elements';
 import { Button as MovingBorderButton } from '@/components/ui/moving-border';
 import { MapPin, Mail, Phone, Clock, Facebook, Instagram, Linkedin, Send } from 'lucide-react';
 import { TextGenerateEffect } from '@/components/ui/TextGenerateEffect';
+import Image from 'next/image';
+
+import { useRouter } from 'next/navigation';
 
 const schema = z.object({
   name: z.string().min(2, 'Name is required'),
   email: z.string().email('Valid email required'),
   phone: z.string().min(6, 'Phone number required'),
+  coachingType: z.string().min(1, 'Please select a coaching type'),
+  budget: z.string().min(1, 'Please select a budget scale'),
   message: z.string().min(10, 'Message must be at least 10 characters').max(180, 'Maximum 180 characters'),
 });
 
@@ -31,9 +36,9 @@ const contactDetails = [
 ];
 
 const socialLinks = [
-  { icon: Facebook, href: '#', label: 'Facebook' },
+  { icon: Facebook, href: 'https://www.facebook.com/people/ASF-Personal-Training-Services/61561552820774/?rdid=4xaBd3UQIAlkWcxW&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F1BTW3TsBzU%2F', label: 'Facebook' },
   { icon: Instagram, href: 'https://www.instagram.com/asfhealthandfitness/', label: 'Instagram' },
-  { icon: Linkedin, href: '#', label: 'LinkedIn' },
+  { icon: Linkedin, href: 'https://www.linkedin.com/company/asf-personal-training-services/', label: 'LinkedIn' },
 ];
 
 const formFields = [
@@ -43,6 +48,7 @@ const formFields = [
 ];
 
 export default function ContactFooter() {
+  const router = useRouter();
   const [submitted, setSubmitted] = useState(false);
   const [charCount, setCharCount] = useState(0);
 
@@ -54,11 +60,25 @@ export default function ContactFooter() {
   } = useForm<FormData>({ resolver: zodResolver(schema) });
 
   const onSubmit = async (data: FormData) => {
-    await new Promise(r => setTimeout(r, 1000));
-    console.log(data);
-    setSubmitted(true);
-    reset();
-    setTimeout(() => setSubmitted(false), 4000);
+    try {
+      const response = await fetch('/api/submit-lead', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (response.ok) {
+        setSubmitted(true);
+        reset();
+        router.push('/thank-you');
+      } else {
+        console.error('Failed to submit form to API');
+      }
+    } catch (err) {
+      console.error('Submission error:', err);
+    }
   };
 
   return (
@@ -106,10 +126,13 @@ export default function ContactFooter() {
             >
               {/* Logo */}
               <div className="mb-6">
-                <span className="text-2xl font-black tracking-tight">
-                  <span className="text-white">ASF</span>
-                  <span className="text-accent"> Fitness</span>
-                </span>
+                <Image
+                  src="/logoasf.webp"
+                  alt="ASF Fitness Logo"
+                  width={144}
+                  height={48}
+                  className="h-10 md:h-12 w-auto object-contain mb-2"
+                />
                 <p className="text-gray-400 mt-1 text-xs">High Performance. Real Results.</p>
               </div>
 
@@ -196,10 +219,58 @@ export default function ContactFooter() {
                         {...register(field.id as keyof FormData)}
                       />
                       {errors[field.id as keyof FormData] && (
-                        <p className="text-red-400 text-[10px]">{errors[field.id as keyof FormData]?.message}</p>
+                        <p className="text-red-400 text-[10px]">{errors[field.id as keyof FormData]?.message as string}</p>
                       )}
                     </motion.div>
                   ))}
+
+                  {/* Dropdown Fields */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-1 pb-1">
+                    <motion.div
+                      initial={{ opacity: 0, y: 15 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: 0.3 }}
+                      className="space-y-1.5"
+                    >
+                      <Label htmlFor="coachingType" className="text-[11px] font-bold uppercase tracking-wider text-gray-400">Coaching Type</Label>
+                      <select
+                        id="coachingType"
+                        {...register('coachingType')}
+                        className="w-full bg-zinc-800 text-white rounded-md px-3 h-10 text-xs border-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-400 transition duration-300 appearance-none"
+                      >
+                        <option value="">Select option</option>
+                        <option value="Suit Coaching">Suit Coaching</option>
+                        <option value="VIP">VIP</option>
+                        <option value="Personal">Personal</option>
+                        <option value="Couple">Couple</option>
+                      </select>
+                      {errors.coachingType && <p className="text-red-400 text-[10px]">{errors.coachingType.message}</p>}
+                    </motion.div>
+
+                    <motion.div
+                      initial={{ opacity: 0, y: 15 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: 0.35 }}
+                      className="space-y-1.5"
+                    >
+                      <Label htmlFor="budget" className="text-[11px] font-bold uppercase tracking-wider text-gray-400">Budget</Label>
+                      <select
+                        id="budget"
+                        {...register('budget')}
+                        className="w-full bg-zinc-800 text-white rounded-md px-3 h-10 text-xs border-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-400 transition duration-300 appearance-none"
+                      >
+                        <option value="">Select range</option>
+                        <option value="$0 - $500">$0 - $500</option>
+                        <option value="$500 - $1,000">$500 - $1,000</option>
+                        <option value="$1,000 - $2,000">$1,000 - $2,000</option>
+                        <option value="$2,000 - $3,000">$2,000 - $3,000</option>
+                        <option value="$3,000+">$3,000+</option>
+                      </select>
+                      {errors.budget && <p className="text-red-400 text-[10px]">{errors.budget.message}</p>}
+                    </motion.div>
+                  </div>
 
                   {/* Textarea */}
                   <motion.div
@@ -259,10 +330,13 @@ export default function ContactFooter() {
           <div className="flex flex-col md:flex-row items-center justify-between gap-6">
             {/* Logo */}
             <div className="flex-shrink-0">
-              <span className="text-xl font-black tracking-tight">
-                <span className="text-white">ASF</span>
-                <span className="text-accent"> Fitness</span>
-              </span>
+              <Image
+                src="/logoasf.webp"
+                alt="ASF Fitness Logo"
+                width={120}
+                height={40}
+                className="h-8 md:h-10 w-auto object-contain"
+              />
             </div>
 
             {/* Nav Links */}
@@ -306,7 +380,7 @@ export default function ContactFooter() {
               <span className="hidden sm:inline text-gray-700">|</span>
               <span>Copyright © 2025 ASF Fitness. All Rights Reserved.</span>
               <span className="hidden sm:inline text-gray-700">|</span>
-              <span>Designed by <a href="#" className="text-accent/70 hover:text-accent transition-colors">Decimal Technologies</a></span>
+              <span>Built with passion by <a href="https://buildatscale.tech" target="_blank" rel="noopener noreferrer" className="text-accent/70 hover:text-accent transition-colors">Build at Scale</a></span>
             </div>
           </div>
         </div>
