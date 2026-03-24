@@ -29,15 +29,30 @@ type FormData = z.infer<typeof schema>;
 const navLinks = ['About', 'Services', 'Transformations', 'Founder', 'Team', 'FAQ', 'Blog', 'Contact'];
 
 const contactDetails = [
-  { icon: MapPin, label: 'Address', value: 'ASF, Dubai, UAE' },
-  { icon: Mail, label: 'Email', value: 'akshay.asf@gmail.com' },
-  { icon: Phone, label: 'Phone', value: '+971 589485094' },
+  { 
+    icon: MapPin, 
+    label: 'Address', 
+    value: 'ASF, Dubai, UAE',
+    href: 'https://maps.google.com/?q=ASF+Fitness+Dubai+UAE'
+  },
+  { 
+    icon: Mail, 
+    label: 'Email', 
+    value: 'akshay.asf@gmail.com',
+    href: 'mailto:akshay.asf@gmail.com'
+  },
+  { 
+    icon: Phone, 
+    label: 'Phone', 
+    value: '+971 589485094',
+    href: 'tel:+971589485094'
+  },
   { icon: Clock, label: 'Hours', value: 'Mon–Sat: 6AM–8PM  |  Sunday: Closed' },
 ];
 
 const socialLinks = [
   { icon: Facebook, href: 'https://www.facebook.com/people/ASF-Personal-Training-Services/61561552820774/?rdid=4xaBd3UQIAlkWcxW&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F1BTW3TsBzU%2F', label: 'Facebook' },
-  { icon: Instagram, href: 'https://www.instagram.com/asfhealthandfitness/', label: 'Instagram' },
+  { icon: Instagram, href: 'https://www.instagram.com/asf_dubai?utm_source=ig_web_button_share_sheet&igsh=ZDZDc0MzIxNw==', label: 'Instagram' },
   { icon: Linkedin, href: 'https://www.linkedin.com/company/asf-personal-training-services/', label: 'LinkedIn' },
 ];
 
@@ -138,24 +153,44 @@ export default function ContactFooter() {
 
               {/* Contact Details */}
               <div className="space-y-4 mb-6">
-                {contactDetails.map((item, i) => (
-                  <motion.div
-                    key={item.label}
-                    initial={{ opacity: 0, x: -20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: i * 0.1 }}
-                    className="flex items-start gap-4"
-                  >
-                    <div className="bg-accent/10 p-2 rounded-xl flex-shrink-0">
-                      <item.icon className="w-4 h-4 text-accent" />
-                    </div>
-                    <div>
-                      <p className="text-[10px] text-gray-500 uppercase tracking-wider font-semibold mb-0.5">{item.label}</p>
-                      <p className="text-white text-xs font-medium">{item.value}</p>
-                    </div>
-                  </motion.div>
-                ))}
+                {contactDetails.map((item, i) => {
+                  const Content = (
+                    <>
+                      <div className="bg-accent/10 p-2 rounded-xl flex-shrink-0">
+                        <item.icon className="w-4 h-4 text-accent" />
+                      </div>
+                      <div>
+                        <p className="text-[10px] text-gray-500 uppercase tracking-wider font-semibold mb-0.5">{item.label}</p>
+                        <p className="text-white text-xs font-medium">{item.value}</p>
+                      </div>
+                    </>
+                  );
+
+                  return (
+                    <motion.div
+                      key={item.label}
+                      initial={{ opacity: 0, x: -20 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: i * 0.1 }}
+                    >
+                      {'href' in item ? (
+                        <a 
+                          href={item.href} 
+                          target={item.label === 'Address' ? '_blank' : undefined}
+                          rel={item.label === 'Address' ? 'noopener noreferrer' : undefined}
+                          className="flex items-start gap-4 hover:bg-white/5 p-2 -m-2 rounded-xl transition-colors duration-200"
+                        >
+                          {Content}
+                        </a>
+                      ) : (
+                        <div className="flex items-start gap-4 p-2 -m-2">
+                          {Content}
+                        </div>
+                      )}
+                    </motion.div>
+                  );
+                })}
               </div>
 
               {/* Social Links */}
@@ -309,8 +344,8 @@ export default function ContactFooter() {
                       disabled={isSubmitting}
                       borderRadius="2rem"
                       containerClassName="h-12 w-full"
-                      className="bg-accent text-dark font-bold text-xs tracking-wider flex items-center gap-2 justify-center"
-                      borderClassName="bg-[radial-gradient(var(--accent)_40%,transparent_60%)]"
+                      className="bg-purple text-white hover:bg-yellow hover:text-black font-bold text-xs tracking-wider flex items-center gap-2 justify-center transition-all duration-300"
+                      borderClassName="bg-[radial-gradient(var(--purple)_40%,transparent_60%)]"
                     >
                       <Send className="w-3.5 h-3.5" />
                       {isSubmitting ? 'Sending...' : 'Send Message'}
@@ -374,13 +409,9 @@ export default function ContactFooter() {
         <div className="border-t border-white/5">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
             <div className="flex flex-col sm:flex-row flex-wrap justify-center items-center gap-2 text-center text-xs text-gray-600">
-              <a href="#" className="hover:text-gray-400 transition-colors">Terms of Use</a>
-              <span className="hidden sm:inline text-gray-700">|</span>
-              <a href="#" className="hover:text-gray-400 transition-colors">Privacy Policy</a>
-              <span className="hidden sm:inline text-gray-700">|</span>
               <span>Copyright © 2025 ASF Fitness. All Rights Reserved.</span>
               <span className="hidden sm:inline text-gray-700">|</span>
-              <span>Built with passion by <a href="https://buildatscale.tech" target="_blank" rel="noopener noreferrer" className="text-accent/70 hover:text-accent transition-colors">Build at Scale</a></span>
+              <span>Built with passion by <a href="https://buildatscale.com/" target="_blank" rel="noopener noreferrer" className="text-accent/70 hover:text-accent transition-colors font-medium">Build at Scale</a></span>
             </div>
           </div>
         </div>
