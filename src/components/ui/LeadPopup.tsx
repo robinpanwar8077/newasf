@@ -104,13 +104,6 @@ export default function LeadPopup() {
             <div className="absolute -top-24 -left-24 w-64 h-64 bg-yellow/5 rounded-full blur-[80px] pointer-events-none" />
             <div className="absolute -bottom-24 -right-24 w-64 h-64 bg-purple/20 rounded-full blur-[80px] pointer-events-none" />
 
-            <button
-              onClick={closePopup}
-              className="absolute top-8 right-8 text-white/40 hover:text-white transition-all hover:rotate-90 duration-300"
-            >
-              <X size={28} />
-            </button>
-
             {submitted ? (
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
@@ -225,6 +218,17 @@ export default function LeadPopup() {
                 </p>
               </div>
             )}
+
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                closePopup();
+              }}
+              className="absolute top-6 right-6 text-white/40 hover:text-white transition-all hover:rotate-90 duration-300 z-50 p-2"
+              aria-label="Close popup"
+            >
+              <X size={24} />
+            </button>
           </motion.div>
         </div>
       )}

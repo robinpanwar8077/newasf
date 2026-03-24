@@ -20,7 +20,7 @@ const faqData = [
   {
     col: 'left',
     question: "Where are the training sessions conducted?",
-    answer: "Sessions are conducted at our state-of-the-art ASF facility in Dubai (ASF, Dubai, UAE). We also offer flexible at-home or outdoor training for clients who prefer a more private setting. Contact us to discuss which option is best for you."
+    answer: "Sessions are conducted at our flagship facility: Fonds Building, Sheikh Zayed Road, Office 2, Dubai. We are also proud to have tie-up facilities across Dubai and offer flexible at-home or outdoor training to provide maximum convenience for our clients."
   },
   {
     col: 'left',

@@ -9,7 +9,7 @@ import { BackgroundBeamsWithCollision } from '@/components/ui/background-beams-w
 import { Meteors } from '@/components/ui/meteors';
 import { Input, Label } from '@/components/ui/signup-form-elements';
 import { Button as MovingBorderButton } from '@/components/ui/moving-border';
-import { MapPin, Mail, Phone, Clock, Facebook, Instagram, Linkedin, Send } from 'lucide-react';
+import { MapPin, Mail, Phone, Clock, Facebook, Instagram, Linkedin, Send, Apple, Smartphone } from 'lucide-react';
 import { TextGenerateEffect } from '@/components/ui/TextGenerateEffect';
 import Image from 'next/image';
 
@@ -32,14 +32,14 @@ const contactDetails = [
   { 
     icon: MapPin, 
     label: 'Address', 
-    value: 'ASF, Dubai, UAE',
-    href: 'https://maps.google.com/?q=ASF+Fitness+Dubai+UAE'
+    value: 'Fonds Building, Sheikh Zayed Road, Office 2, Dubai, UAE',
+    href: 'https://maps.google.com/?q=Fonds+Building+Sheikh+Zayed+Road+Office+2+Dubai'
   },
   { 
     icon: Mail, 
     label: 'Email', 
-    value: 'akshay.asf@gmail.com',
-    href: 'mailto:akshay.asf@gmail.com'
+    value: 'suraj@asfhealthandfitness.com',
+    href: 'mailto:suraj@asfhealthandfitness.com'
   },
   { 
     icon: Phone, 
@@ -212,6 +212,46 @@ export default function ContactFooter() {
                     <s.icon className="w-4 h-4" />
                   </motion.a>
                 ))}
+              </div>
+
+              {/* App Download Links */}
+              <div className="mt-8 pt-8 border-t border-white/5">
+                <p className="text-[10px] text-gray-500 uppercase tracking-[0.2em] font-bold mb-4">Download Our App</p>
+                <div className="flex flex-col sm:flex-row gap-4">
+                  <motion.a
+                    href="https://apps.apple.com/app/asf-health-and-fitness/id6758930684"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    initial={{ opacity: 0, y: 10 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    whileHover={{ y: -3 }}
+                    className="flex items-center gap-3 bg-white/5 hover:bg-white/10 border border-white/10 p-3 rounded-2xl transition-all group"
+                  >
+                    <Apple className="w-6 h-6 text-white group-hover:text-accent transition-colors" />
+                    <div className="text-left">
+                      <p className="text-[9px] text-gray-500 uppercase font-bold leading-none mb-1">Download on</p>
+                      <p className="text-sm text-white font-black leading-none">App Store</p>
+                    </div>
+                  </motion.a>
+
+                  <motion.a
+                    href="https://play.google.com/store/apps/details?id=com.app.asfhealthfitness"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    initial={{ opacity: 0, y: 10 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    whileHover={{ y: -3 }}
+                    className="flex items-center gap-3 bg-white/5 hover:bg-white/10 border border-white/10 p-3 rounded-2xl transition-all group"
+                  >
+                    <Smartphone className="w-6 h-6 text-white group-hover:text-accent transition-colors" />
+                    <div className="text-left">
+                      <p className="text-[9px] text-gray-500 uppercase font-bold leading-none mb-1">Get it on</p>
+                      <p className="text-sm text-white font-black leading-none">Google Play</p>
+                    </div>
+                  </motion.a>
+                </div>
               </div>
             </motion.div>
 

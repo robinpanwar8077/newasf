@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Dumbbell, Activity, Users, Flower2, Zap, HeartPulse } from 'lucide-react';
+import { Dumbbell, Activity, Users, Flower2, Zap, HeartPulse, Brain, Salad } from 'lucide-react';
 import { TextGenerateEffect } from '@/components/ui/TextGenerateEffect';
 
 const services = [
@@ -24,6 +24,21 @@ const services = [
     title: "Semi Private / Couple Training",
     icon: <Activity size={32} />,
     description: "Exclusive small-group sessions or partner training focused on shared goals and high-intensity performance."
+  },
+  {
+    title: "Mental Health",
+    icon: <Brain size={32} />,
+    description: "Holistic mindset coaching to manage stress, improve focus, and build the mental resilience required for elite performance."
+  },
+  {
+    title: "Yoga",
+    icon: <Flower2 size={32} />,
+    description: "Specialized recovery sessions combining flexibility, breathwork, and mobility to complement high-intensity training."
+  },
+  {
+    title: "Nutrition",
+    icon: <Salad size={32} />,
+    description: "Metabolic-focused nutrition planning and meal strategies designed to fuel your ambition and optimize body composition."
   }
 ];
 

@@ -9,28 +9,39 @@ export async function POST(req: Request) {
     const GOOGLE_SCRIPT_URL = process.env.GOOGLE_SCRIPT_URL || '';
 
     if (!GOOGLE_SCRIPT_URL) {
-      console.warn('No Google Script URL configured. Data was not sent to Sheets.');
-      // Proceeding with success for local testing purposes before the user configures the URL.
-      // In production, you'd want to handle this error uniquely.
-    } else {
-      const response = await fetch(GOOGLE_SCRIPT_URL, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(body),
-      });
+      console.warn('GOOGLE_SCRIPT_URL is not defined in environment variables.');
+      return NextResponse.json({ 
+        success: false, 
+        message: 'Configuration Error: GOOGLE_SCRIPT_URL is missing.' 
+      }, { status: 500 });
+    }
 
-      if (!response.ok) {
-        throw new Error('Failed to submit form to Google Sheets');
-      }
+    console.log('Attempting to send lead to Google Script:', GOOGLE_SCRIPT_URL.substring(0, 30) + '...');
+
+    const response = await fetch(GOOGLE_SCRIPT_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        timestamp: new Date().toISOString(),
+        ...body
+      }),
+    });
+
+    if (!response.ok) {
+      const errorText = await response.text().catch(() => 'No error text');
+      console.error('Google Script Error Response:', errorText);
+      throw new Error(`Google Script returned ${response.status}: ${errorText}`);
     }
 
     return NextResponse.json({ success: true }, { status: 200 });
-  } catch (error) {
-    console.error('Error submitting form:', error);
+  } catch (error: any) {
+    console.error('CRITICAL: Error in submit-lead API:', {
+      message: error.message,
+      stack: error.stack,
+      cause: error.cause
+    });
     return NextResponse.json(
-      { success: false, message: 'Failed to submit form' },
+      { success: false, message: 'Internal Server Error', debug: error.message },
       { status: 500 }
     );
   }
