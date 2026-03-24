@@ -18,10 +18,10 @@ function ThickRibbon() {
   ];
 
   return (
-    <div className="absolute top-[92%] sm:top-[90%] md:top-[80%] left-0 w-full h-[60vh] md:h-[80vh] -translate-y-1/2 overflow-hidden pointer-events-none z-0">
+    <div className="absolute top-[85%] sm:top-[88%] md:top-[80%] left-0 w-full h-[70vh] md:h-[80vh] -translate-y-1/2 overflow-visible pointer-events-none z-0">
       <svg
         viewBox="0 0 1440 400"
-        className="w-full h-full preserve-3d"
+        className="w-full h-full preserve-3d overflow-visible"
         preserveAspectRatio="none"
         xmlns="http://www.w3.org/2000/svg"
       >

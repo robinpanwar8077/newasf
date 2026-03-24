@@ -120,7 +120,7 @@ export default function Navbar() {
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
               transition={{ duration: 0.35, ease: "easeInOut" }}
-              className="fixed top-0 right-0 bottom-0 w-full sm:w-[360px] bg-white z-[70] shadow-2xl p-8 flex flex-col"
+              className="fixed top-0 right-0 bottom-0 w-full sm:w-[360px] bg-purple z-[70] shadow-2xl p-8 flex flex-col"
             >
               <div className="flex justify-between items-center mb-12">
                 <Image
@@ -130,7 +130,7 @@ export default function Navbar() {
                   height={32}
                   className="h-8 w-auto object-contain"
                 />
-                <button onClick={() => setIsOpen(false)} className="p-2 text-dark">
+                <button onClick={() => setIsOpen(false)} className="p-2 text-white">
                   <X size={28} />
                 </button>
               </div>
@@ -141,12 +141,12 @@ export default function Navbar() {
                     key={link.name}
                     href={link.href}
                     onClick={() => setIsOpen(false)}
-                    className="text-lg font-semibold text-dark transition-colors border-b border-gray-100 pb-2"
+                    className="text-lg font-semibold text-white/90 transition-colors border-b border-white/10 pb-2"
                   >
                     {link.name}
                   </a>
                 ))}
-                <button className="mt-4 bg-accent text-dark px-6 py-4 rounded-full text-sm font-bold shadow-lg hover:bg-yellow transition-all">
+                <button className="mt-4 bg-yellow text-black px-6 py-4 rounded-full text-sm font-bold shadow-lg hover:bg-white transition-all">
                   Register Your Interest
                 </button>
               </div>
