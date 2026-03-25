@@ -12,14 +12,14 @@ export const FlipWords = ({
   duration?: number;
   className?: string;
 }) => {
-  const [currentWord, setCurrentWord] = useState(words[0]);
+  const [currentIndex, setCurrentIndex] = useState(0);
   const [isAnimating, setIsAnimating] = useState<boolean>(false);
 
   const startAnimation = useCallback(() => {
-    const word = words[words.indexOf(currentWord) + 1] || words[0];
-    setCurrentWord(word);
+    const nextIndex = (currentIndex + 1) % words.length;
+    setCurrentIndex(nextIndex);
     setIsAnimating(true);
-  }, [currentWord, words]);
+  }, [currentIndex, words]);
 
   useEffect(() => {
     if (!isAnimating)
@@ -27,6 +27,8 @@ export const FlipWords = ({
         startAnimation();
       }, duration);
   }, [isAnimating, duration, startAnimation]);
+
+  const currentWord = words[currentIndex];
 
   return (
     <AnimatePresence
@@ -57,10 +59,10 @@ export const FlipWords = ({
           position: "absolute",
         }}
         className={cn(
-          "z-10 inline-block relative text-left text-neutral-900 px-2",
+          "z-10 inline-block relative px-2",
           className
         )}
-        key={currentWord}
+        key={currentIndex}
       >
         {currentWord.split(" ").map((word, wordIndex) => (
           <motion.span

@@ -4,6 +4,7 @@ import { motion, useScroll, useTransform, useInView } from 'framer-motion';
 import { useRef } from 'react';
 import { Spotlight } from '@/components/ui/Spotlight';
 import { TextGenerateEffect } from '@/components/ui/TextGenerateEffect';
+import { FlipWords } from '@/components/ui/flip-words';
 
 function ThickRibbon() {
   const colors = [
@@ -125,25 +126,6 @@ export default function Hero() {
   const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
 
   const headingRef = useRef(null);
-  const isHeadingInView = useInView(headingRef, { once: true, margin: "-10%" });
-
-  const headingContainer = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { staggerChildren: 0.12 }
-    }
-  };
-
-  const wordAnim = {
-    hidden: { opacity: 0, y: 30, filter: "blur(10px)" },
-    visible: {
-      opacity: 1,
-      y: 0,
-      filter: "blur(0px)",
-      transition: { duration: 1, ease: "easeOut" as const }
-    }
-  };
 
   return (
     <section
@@ -170,20 +152,16 @@ export default function Hero() {
 
           <div ref={headingRef} className="w-full flex justify-center">
             <motion.h1
-              variants={headingContainer}
-              initial="hidden"
-              animate={isHeadingInView ? "visible" : "hidden"}
-              className="text-[36px] sm:text-4xl md:text-5xl lg:text-7xl font-black text-purple tracking-tight font-heading leading-tight mb-8 flex flex-col md:flex-row md:flex-nowrap justify-center gap-y-2 md:gap-y-0 md:gap-x-4 whitespace-nowrap overflow-visible"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              className="text-[36px] sm:text-4xl md:text-5xl lg:text-7xl font-black text-purple tracking-tight font-heading leading-tight mb-8 text-center whitespace-nowrap overflow-visible"
             >
-              {[
-                { text: "ADAPTIVE.", highlight: "A" },
-                { text: "SUSTAINABLE.", highlight: "S" },
-                { text: "FITNESS.", highlight: "F" }
-              ].map((word, i) => (
-                <motion.span key={i} variants={wordAnim}>
-                  <span className="text-purple">{word.highlight}</span>{word.text.slice(1)}
-                </motion.span>
-              ))}
+              <FlipWords 
+                words={["ADAPTIVE. SUSTAINABLE. FITNESS.", "ADAPTIVE. SUSTAINABLE. FITNESS."]} 
+                duration={4000} 
+                className="text-purple block" 
+              />
             </motion.h1>
           </div>
 
